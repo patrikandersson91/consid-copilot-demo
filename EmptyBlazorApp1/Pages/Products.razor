@@ -1,0 +1,66 @@
+﻿@page "/products"
+@using EmptyBlazorApp1.Helpers;
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    @foreach (var product in products)
+    {
+        <div class="p-4">
+            <div class="bg-white rounded-lg shadow-md h-full">
+                <div class="py-3 px-4">
+                    <img src="@product.ImageUrl" alt="@product.ProductName" class="w-full h-48 object-contain mb-4">
+                    <h3 class="text-gray-800 font-semibold text-lg mb-3">@TextHelpers.ToTitleCase(@product.ProductName)</h3>
+                    <p class="text-gray-600 text-sm mb-3">@TextHelpers.Truncate(@product.Description, 20)</p>
+                </div>
+                <div class="bg-gray-200 px-3 py-2 flex justify-between items-center">
+                    <h4 class="text-gray-700 font-semibold text-xl">$@product.Price</h4>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Add to Cart
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Product> products = new List<Product>()
+    {
+        new Product()
+        {
+            ProductName = "product 1",
+            Description = "Product 1 Description",
+            ImageUrl = "https://source.unsplash.com/random/400x400",
+            Price = 99.99
+        },
+        new Product()
+        {
+            ProductName = "product 2",
+            Description = "Product 2 Description",
+            ImageUrl = "https://source.unsplash.com/random/401x400",
+            Price = 149.99
+        },
+        new Product()
+        {
+            ProductName = "Product 3",
+            Description = "Product 3 Description",
+            ImageUrl = "https://source.unsplash.com/random/400x401",
+            Price = 199.99
+        },
+        new Product()
+        {
+            ProductName = "Product 4",
+            Description = "Product 4 Description",
+            ImageUrl = "https://source.unsplash.com/random/401x401",
+            Price = 249.99
+        }
+    };
+
+    private class Product
+    {
+        public string ProductName { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
+    }
+}
